@@ -86,51 +86,99 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;border-bottom:1px solid var(
 .check-card.ai-card .check-tag{background:rgba(255,255,255,.15);color:rgba(255,255,255,.9)}
 
 /* ── 데모 시뮬레이션 ── */
-.demo-wrap{background:var(--bg2);border:1px solid var(--border);border-radius:16px;overflow:hidden;box-shadow:0 8px 40px rgba(0,0,0,.08)}
-.demo-header{padding:12px 16px;border-bottom:1px solid var(--border);display:flex;align-items:center;gap:12px;background:var(--bg2)}
+.demo-outer{border:1px solid var(--border);border-radius:16px;overflow:hidden;box-shadow:0 8px 40px rgba(0,0,0,.08);background:var(--bg2)}
+.demo-browser-bar{padding:10px 16px;background:var(--bg3);border-bottom:1px solid var(--border);display:flex;align-items:center;gap:12px}
 .demo-dots{display:flex;align-items:center;gap:6px}
-.demo-sel-pill{font-size:11px;background:var(--bg3);border:1px solid var(--border);color:var(--text2);border-radius:20px;padding:3px 10px;font-weight:500}
-.demo-title-label{font-size:12px;color:var(--text3);font-weight:500;flex:1;text-align:center}
-.demo-run-btn{padding:6px 16px;border-radius:8px;background:var(--text);color:#fff;font-size:12px;font-weight:700;border:none;cursor:pointer;transition:all .15s;display:flex;align-items:center;gap:5px}
+.demo-url-bar{flex:1;background:var(--bg2);border:1px solid var(--border);border-radius:7px;padding:4px 12px;font-size:11px;color:var(--text3);font-weight:500;max-width:340px;margin:0 auto}
+.demo-run-btn{padding:6px 16px;border-radius:8px;background:var(--text);color:#fff;font-size:12px;font-weight:700;border:none;cursor:pointer;transition:all .15s;display:flex;align-items:center;gap:5px;white-space:nowrap}
 .demo-run-btn:hover{background:#333}
 .demo-run-btn:disabled{opacity:.4;cursor:not-allowed}
-.demo-progress{padding:10px 16px;border-bottom:1px solid var(--border);display:none;background:var(--bg3)}
-.demo-steps{display:flex;margin-bottom:8px}
-.demo-step{flex:1;text-align:center;font-size:10px;padding:3px 0;color:var(--text3);border-bottom:2px solid var(--border);transition:all .3s;font-weight:500}
-.demo-step.active{color:var(--accent);border-color:var(--accent)}
-.demo-step.done{color:var(--green);border-color:var(--green)}
+/* 스플릿 레이아웃 */
+.demo-split{display:flex;min-height:480px;position:relative}
+/* 왼쪽: 앱 화면 */
+.demo-app{flex:1;background:#f8f8fb;border-right:1px solid var(--border);overflow:hidden;position:relative}
+.app-topbar{background:#fff;border-bottom:1px solid #ececec;padding:0 20px;height:44px;display:flex;align-items:center;justify-content:space-between}
+.app-logo{font-size:13px;font-weight:800;color:#1a1a1a;letter-spacing:-.3px}
+.app-nav{display:flex;gap:16px}
+.app-nav a{font-size:12px;color:#888;text-decoration:none;font-weight:500}
+.app-nav .app-btn{background:#1a1a1a;color:#fff;padding:5px 14px;border-radius:7px;font-size:11px;font-weight:700}
+.app-layout{display:flex;height:calc(100% - 44px)}
+.app-sidebar{width:148px;background:#fff;border-right:1px solid #ececec;padding:16px 0;flex-shrink:0}
+.app-sidebar-item{padding:7px 16px;font-size:12px;color:#888;display:flex;align-items:center;gap:8px;cursor:default}
+.app-sidebar-item.active{color:#1a1a1a;font-weight:600;background:#f5f5f7}
+.app-sidebar-icon{width:16px;height:16px;border-radius:3px;background:#e0e0e8;flex-shrink:0}
+.app-content{flex:1;padding:24px 20px;overflow:auto}
+.app-hero-title{font-size:26px;font-weight:800;color:#1a1a1a;letter-spacing:-.03em;margin-bottom:4px}
+.app-hero-sub{font-size:13px;color:#888;margin-bottom:20px}
+.app-cards{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:20px}
+.app-card{background:#fff;border:1px solid #ececec;border-radius:12px;padding:14px;cursor:default}
+.app-card-ill{width:100%;height:60px;border-radius:8px;background:#eeeef8;margin-bottom:10px}
+.app-card-label{font-size:10px;color:#aaa;font-weight:600;margin-bottom:4px}
+.app-card-title{font-size:13px;font-weight:700;color:#1a1a1a}
+.app-card-link{font-size:12px;color:#888;margin-top:4px;display:flex;align-items:center;gap:3px}
+.app-agents{margin-bottom:0}
+.app-section-title{font-size:13px;font-weight:700;color:#1a1a1a;margin-bottom:10px;display:flex;align-items:center;gap:4px}
+.app-agent-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
+.app-agent-card{background:#fff;border:1px solid #ececec;border-radius:10px;padding:12px}
+.app-agent-icon{width:28px;height:28px;border-radius:8px;margin-bottom:8px;display:flex;align-items:center;justify-content:center;font-size:16px}
+.app-agent-name{font-size:12px;font-weight:700;color:#1a1a1a;margin-bottom:2px}
+.app-agent-desc{font-size:10px;color:#aaa;line-height:1.4}
+/* 오버레이 하이라이트 */
+.app-highlight{position:absolute;border:2px solid var(--red);border-radius:4px;pointer-events:none;opacity:0;transition:opacity .3s;background:rgba(220,38,38,.06)}
+.app-highlight.show{opacity:1}
+/* 오른쪽: 플러그인 패널 */
+.demo-plugin{width:260px;flex-shrink:0;background:#fff;border-left:1px solid var(--border);display:flex;flex-direction:column;font-size:12px}
+.plugin-hd{padding:10px 12px;border-bottom:1px solid var(--border);display:flex;align-items:center;gap:7px;background:#fff}
+.plugin-logo{width:20px;height:20px;border-radius:5px;background:#1a1a1a;display:flex;align-items:center;justify-content:center;font-size:8px;font-weight:800;color:#fff;flex-shrink:0}
+.plugin-name{font-size:12px;font-weight:800;color:#1a1a1a;flex:1}
+.plugin-close{font-size:14px;color:#ccc;cursor:default}
+.plugin-api-row{display:flex;gap:5px;padding:8px 10px;border-bottom:1px solid var(--border)}
+.plugin-api-input{flex:1;background:var(--bg3);border:1px solid var(--border);border-radius:5px;padding:4px 7px;font-size:10px;color:var(--text3)}
+.plugin-save-btn{background:#1a1a1a;color:#fff;border:none;border-radius:5px;padding:4px 9px;font-size:10px;font-weight:700;cursor:pointer}
+.plugin-dot{width:6px;height:6px;border-radius:50%;background:#22c55e;flex-shrink:0;align-self:center}
+.plugin-run{margin:8px 10px;background:#1a1a1a;color:#fff;border:none;border-radius:8px;padding:8px;font-size:11px;font-weight:700;cursor:pointer;width:calc(100% - 20px);transition:background .15s}
+.plugin-run:hover{background:#333}
+.plugin-run:disabled{opacity:.4;cursor:not-allowed}
+.plugin-progress{display:none;padding:6px 10px;border-bottom:1px solid var(--border)}
+.plugin-steps{display:flex;margin-bottom:5px}
+.plugin-step{flex:1;font-size:9px;text-align:center;padding:2px 0;color:var(--text3);border-bottom:2px solid var(--border);transition:all .3s}
+.plugin-step.active{color:var(--accent);border-color:var(--accent)}
+.plugin-step.done{color:var(--green);border-color:var(--green)}
 .pbar-bg{height:3px;background:var(--border);border-radius:2px;overflow:hidden}
 .pbar-fill{height:100%;background:var(--text);border-radius:2px;width:0;transition:width .5s ease}
-.demo-body{min-height:280px;overflow:hidden}
-.demo-empty{display:flex;flex-direction:column;align-items:center;justify-content:center;height:280px;gap:8px;color:var(--text3);font-size:13px;text-align:center}
+.plugin-summary{display:none;padding:7px 10px;border-bottom:1px solid var(--border);gap:4px;flex-wrap:wrap}
+.plugin-body{flex:1;overflow-y:auto}
+.plugin-empty{display:flex;flex-direction:column;align-items:center;justify-content:center;height:200px;gap:6px;color:var(--text3);font-size:11px;text-align:center}
 .issue-group{border-bottom:1px solid var(--border)}
-.grp-hd{padding:7px 16px;background:var(--bg3);display:flex;align-items:center;gap:8px}
-.sev-dot{width:7px;height:7px;border-radius:50%;flex-shrink:0}
+.grp-hd{padding:5px 10px;background:var(--bg3);display:flex;align-items:center;gap:6px}
+.sev-dot{width:6px;height:6px;border-radius:50%;flex-shrink:0}
 .sev-dot.critical{background:var(--red)}.sev-dot.warning{background:#f59e0b}.sev-dot.info{background:var(--accent)}
-.grp-label{font-size:11px;font-weight:700;color:var(--text2);text-transform:uppercase;letter-spacing:.5px;flex:1}
-.grp-count{font-size:11px;color:var(--text3)}
-.issue-item{padding:10px 16px;border-top:1px solid var(--border);display:flex;flex-direction:column;gap:3px;opacity:0;transform:translateY(4px);transition:all .3s;background:var(--bg2)}
+.grp-label{font-size:10px;font-weight:700;color:var(--text2);text-transform:uppercase;letter-spacing:.4px;flex:1}
+.grp-count{font-size:10px;color:var(--text3)}
+.issue-item{padding:8px 10px;border-top:1px solid var(--border);display:flex;flex-direction:column;gap:2px;opacity:0;transform:translateY(3px);transition:all .3s;cursor:pointer}
 .issue-item.show{opacity:1;transform:none}
 .issue-item:hover{background:var(--bg3)}
-.issue-row{display:flex;align-items:flex-start;gap:7px}
-.itype{font-size:10px;padding:2px 6px;border-radius:4px;font-weight:700;white-space:nowrap;flex-shrink:0}
+.issue-row{display:flex;align-items:flex-start;gap:5px}
+.itype{font-size:9px;padding:1px 5px;border-radius:3px;font-weight:700;white-space:nowrap;flex-shrink:0}
 .itype.contrast{background:var(--red-bg);color:var(--red)}
 .itype.touch_target{background:#f0fdf4;color:#16a34a}
 .itype.raw_color{background:var(--blue-bg);color:var(--accent)}
 .itype.layer_name{background:var(--bg3);color:var(--text2)}
 .itype.spacing{background:#f0fdfa;color:#0d9488}
-.imsg{font-size:12px;color:var(--text);flex:1;font-weight:500}
-.idetail{font-size:11px;color:var(--text2)}
-.inode{font-size:10px;color:var(--text3)}
-.color-fix{display:flex;align-items:center;gap:5px;margin-top:4px;flex-wrap:wrap}
-.fix-label{font-size:10px;color:var(--text3);font-weight:500}
-.cswatch{width:16px;height:16px;border-radius:4px;border:1px solid var(--border);cursor:pointer;transition:transform .1s}
+.imsg{font-size:11px;color:var(--text);flex:1;font-weight:500;line-height:1.35}
+.idetail{font-size:10px;color:var(--text2)}
+.inode{font-size:9px;color:var(--text3)}
+.color-fix{display:flex;align-items:center;gap:4px;margin-top:3px;flex-wrap:wrap}
+.fix-label{font-size:9px;color:var(--text3);font-weight:500}
+.cswatch{width:14px;height:14px;border-radius:3px;border:1px solid var(--border);cursor:pointer;transition:transform .1s}
 .cswatch:hover{transform:scale(1.2)}
-.demo-summary{padding:10px 16px;border-bottom:1px solid var(--border);display:none;gap:6px;flex-wrap:wrap;background:var(--bg2)}
-.badge{padding:3px 9px;border-radius:5px;font-size:11px;font-weight:700}
+.badge{padding:2px 7px;border-radius:4px;font-size:10px;font-weight:700}
 .badge.critical{background:var(--red-bg);color:var(--red)}
 .badge.warning{background:var(--amber-bg);color:var(--amber)}
 .badge.info{background:var(--blue-bg);color:var(--accent)}
+/* 구버전 호환 (색상 교체 섹션) */
+.demo-wrap{background:var(--bg2);border:1px solid var(--border);border-radius:16px;overflow:hidden;box-shadow:0 8px 40px rgba(0,0,0,.08)}
+.demo-summary{padding:10px 16px;border-bottom:1px solid var(--border);display:none;gap:6px;flex-wrap:wrap;background:var(--bg2)}
 
 /* ── WCAG 기준표 ── */
 .wcag-table{width:100%;border-collapse:collapse;margin-top:32px;font-size:13px}
@@ -355,44 +403,138 @@ footer{border-top:1px solid var(--border);padding:40px 0;text-align:center;backg
       <p class="section-desc">아래 버튼을 눌러 실제 플러그인 동작을 시뮬레이션해보세요.</p>
     </div>
 
-    <div class="demo-wrap">
-      <div class="demo-header">
+    <div class="demo-outer">
+      <!-- 브라우저 크롬 바 -->
+      <div class="demo-browser-bar">
         <div class="demo-dots">
           <div style="width:12px;height:12px;border-radius:50%;background:#FF5F57"></div>
           <div style="width:12px;height:12px;border-radius:50%;background:#FEBC2E"></div>
           <div style="width:12px;height:12px;border-radius:50%;background:#28C840"></div>
         </div>
-        <div class="demo-title-label">Auto QA Plugin</div>
-        <div class="demo-sel-pill" id="demoSelPill">홈화면 — Main</div>
-        <button class="demo-run-btn" id="demoRunBtn" onclick="runDemo()">
-          <span id="demoBtnIcon">⚡</span>
-          <span id="demoBtnLabel">검사 시작</span>
-        </button>
+        <div class="demo-url-bar">figma.com › SmartAgent — Home</div>
       </div>
 
-      <div class="demo-progress" id="demoProgress">
-        <div class="demo-steps">
-          <div class="demo-step" id="ds1">① 규칙</div>
-          <div class="demo-step" id="ds2">② 화면</div>
-          <div class="demo-step" id="ds3">③ AI</div>
-          <div class="demo-step" id="ds4">④ 완료</div>
+      <!-- 스플릿 레이아웃 -->
+      <div class="demo-split">
+
+        <!-- 왼쪽: 앱 화면 목업 -->
+        <div class="demo-app" id="demoAppArea">
+          <!-- 하이라이트 오버레이들 (JS로 위치 지정) -->
+          <div class="app-highlight" id="hl-contrast1"  style="top:82px;left:16px;width:200px;height:24px"></div>
+          <div class="app-highlight" id="hl-contrast2"  style="top:110px;left:16px;width:160px;height:18px"></div>
+          <div class="app-highlight" id="hl-touch"      style="top:44px;right:14px;width:28px;height:28px"></div>
+          <div class="app-highlight" id="hl-raw1"       style="bottom:72px;right:10px;width:72px;height:30px;border-color:#f59e0b"></div>
+          <div class="app-highlight" id="hl-raw2"       style="top:154px;left:100px;width:80px;height:18px;border-color:#3b82f6"></div>
+
+          <!-- 상단바 -->
+          <div class="app-topbar">
+            <div class="app-logo">SmartAgent</div>
+            <nav class="app-nav">
+              <a href="#">홈</a><a href="#">에이전트</a><a href="#">분석</a>
+              <a href="#" class="app-btn">+ 새 에이전트</a>
+            </nav>
+          </div>
+
+          <!-- 본문 -->
+          <div class="app-layout">
+            <div class="app-sidebar">
+              <div class="app-sidebar-item active"><div class="app-sidebar-icon"></div>대시보드</div>
+              <div class="app-sidebar-item"><div class="app-sidebar-icon"></div>에이전트</div>
+              <div class="app-sidebar-item"><div class="app-sidebar-icon"></div>워크플로우</div>
+              <div class="app-sidebar-item"><div class="app-sidebar-icon"></div>분석</div>
+              <div class="app-sidebar-item"><div class="app-sidebar-icon"></div>설정</div>
+            </div>
+            <div class="app-content">
+              <div class="app-hero-title">내 에이전트</div>
+              <div class="app-hero-sub" style="color:#9090c0">총 6개의 에이전트가 활성화 중입니다</div>
+              <div class="app-cards">
+                <div class="app-card">
+                  <div class="app-card-ill"></div>
+                  <div class="app-card-label">WORKFLOW</div>
+                  <div class="app-card-title">데이터 수집</div>
+                  <div class="app-card-link" style="color:#aaaacc">자세히 →</div>
+                </div>
+                <div class="app-card">
+                  <div class="app-card-ill" style="background:#e8f4ff"></div>
+                  <div class="app-card-label">ANALYSIS</div>
+                  <div class="app-card-title">리포트 자동화</div>
+                  <div class="app-card-link">자세히 →</div>
+                </div>
+                <div class="app-card">
+                  <div class="app-card-ill" style="background:#fff0e8"></div>
+                  <div class="app-card-label">INTEGRATION</div>
+                  <div class="app-card-title">Slack 연동</div>
+                  <div class="app-card-link">자세히 →</div>
+                </div>
+              </div>
+              <div class="app-agents">
+                <div class="app-section-title">추천 에이전트 ✦</div>
+                <div class="app-agent-grid">
+                  <div class="app-agent-card">
+                    <div class="app-agent-icon" style="background:#eeeef8">📊</div>
+                    <div class="app-agent-name">분석 에이전트</div>
+                    <div class="app-agent-desc">데이터를 자동 분석하고 인사이트를 제공합니다</div>
+                  </div>
+                  <div class="app-agent-card">
+                    <div class="app-agent-icon" style="background:#e8f8ee">🤖</div>
+                    <div class="app-agent-name">자동화 봇</div>
+                    <div class="app-agent-desc">반복 작업을 자동화합니다</div>
+                  </div>
+                  <div class="app-agent-card">
+                    <div class="app-agent-icon" style="background:#fff0e8">🔗</div>
+                    <div class="app-agent-name">연동 관리자</div>
+                    <div class="app-agent-desc">외부 서비스와 연결합니다</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
-        <div class="pbar-bg"><div class="pbar-fill" id="demoPbar"></div></div>
-      </div>
 
-      <div class="demo-summary" id="demoSummary">
-        <span class="badge critical">🔴 Critical 2</span>
-        <span class="badge warning">🟡 Warning 3</span>
-        <span class="badge info">🔵 Info 2</span>
-      </div>
+        <!-- 오른쪽: 플러그인 패널 -->
+        <div class="demo-plugin">
+          <div class="plugin-hd">
+            <div class="plugin-logo">QA</div>
+            <div class="plugin-name">Auto QA</div>
+            <div class="plugin-close">✕</div>
+          </div>
 
-      <div class="demo-body" id="demoBody">
-        <div class="demo-empty">
-          <div style="font-size:32px;opacity:.15">◈</div>
-          <div style="margin-top:8px">프레임을 선택하고 검사를 시작하세요</div>
+          <div class="plugin-api-row">
+            <div class="plugin-api-input">Claude API Key ••••••••</div>
+            <button class="plugin-save-btn">저장</button>
+            <div class="plugin-dot"></div>
+          </div>
+
+          <button class="plugin-run" id="pluginRunBtn" onclick="runSplitDemo()">
+            <span id="pRunIcon">⚡</span> <span id="pRunLabel">자동 검사 시작</span>
+          </button>
+
+          <div class="plugin-progress" id="pluginProgress">
+            <div class="plugin-steps">
+              <div class="plugin-step" id="ps1">규칙</div>
+              <div class="plugin-step" id="ps2">화면</div>
+              <div class="plugin-step" id="ps3">AI</div>
+              <div class="plugin-step" id="ps4">완료</div>
+            </div>
+            <div class="pbar-bg"><div class="pbar-fill" id="pluginPbar"></div></div>
+          </div>
+
+          <div class="plugin-summary" id="pluginSummary">
+            <span class="badge critical">🔴 2</span>
+            <span class="badge warning">🟡 3</span>
+            <span class="badge info">🔵 2</span>
+          </div>
+
+          <div class="plugin-body" id="pluginBody">
+            <div class="plugin-empty">
+              <div style="font-size:28px;opacity:.15">◈</div>
+              <div>프레임을 선택하고<br>검사를 시작하세요</div>
+            </div>
+          </div>
         </div>
-      </div>
-    </div>
+
+      </div><!-- /.demo-split -->
+    </div><!-- /.demo-outer -->
 
     <!-- 색상 교체 시연 -->
     <div style="margin-top:48px">
@@ -666,68 +808,121 @@ footer{border-top:1px solid var(--border);padding:40px 0;text-align:center;backg
 
 <script>
 const DEMO_ISSUES = [
-  { sev:"critical", type:"contrast",     msg:"색상 대비 1.89:1 (WCAG AA 기준 4.5:1)", detail:"텍스트 #9090c0 / 배경 #e8e8f0", node:"타이틀 텍스트" },
-  { sev:"critical", type:"contrast",     msg:"색상 대비 2.41:1 (WCAG AA 기준 4.5:1)", detail:"텍스트 #aaaacc / 배경 #f0f0f5", node:"본문 설명" },
-  { sev:"warning",  type:"touch_target", msg:"터치 타겟 32×32px (기준 44×44px)",       detail:"인터랙티브 요소는 44px 이상이어야 합니다", node:"icon-close" },
-  { sev:"warning",  type:"raw_color",    msg:"DS 미등록 색상: #ff6b6b",                detail:"디자인 시스템 토큰에 없는 색상입니다", node:"btn-danger" },
-  { sev:"warning",  type:"raw_color",    msg:"DS 미등록 색상: #2d9cdb",                detail:"디자인 시스템 토큰에 없는 색상입니다", node:"link-text" },
-  { sev:"info",     type:"layer_name",   msg:'기본 레이어명: "Frame 12"',              detail:"의미 있는 이름으로 변경하세요", node:"Frame 12" },
-  { sev:"info",     type:"spacing",      msg:"간격 6px — 4px 배수 아님",              detail:"4px 또는 8px 그리드에 맞춰주세요", node:"card-layout" },
+  { sev:"critical", type:"contrast",     msg:"색상 대비 1.89:1 (WCAG AA 기준 4.5:1)", detail:"텍스트 #9090c0 / 배경 #f5f5f7", node:"app-hero-sub", hl:["hl-contrast1"] },
+  { sev:"critical", type:"contrast",     msg:"색상 대비 2.41:1 (WCAG AA 기준 4.5:1)", detail:"텍스트 #aaaacc / 배경 #f0f0f5", node:"app-card-link", hl:["hl-contrast2"] },
+  { sev:"warning",  type:"touch_target", msg:"터치 타겟 28×28px (기준 44×44px)",       detail:"인터랙티브 요소는 44px 이상이어야 합니다", node:"app-btn", hl:["hl-touch"] },
+  { sev:"warning",  type:"raw_color",    msg:"DS 미등록 색상: #ff6b6b",                detail:"디자인 시스템 토큰에 없는 색상입니다", node:"btn-danger", hl:["hl-raw1"] },
+  { sev:"warning",  type:"raw_color",    msg:"DS 미등록 색상: #aaaacc",                detail:"디자인 시스템 토큰에 없는 색상입니다", node:"link-text", hl:["hl-raw2"] },
+  { sev:"info",     type:"layer_name",   msg:'기본 레이어명: "Frame 12"',              detail:"의미 있는 이름으로 변경하세요", node:"Frame 12", hl:[] },
+  { sev:"info",     type:"spacing",      msg:"간격 6px — 4px 배수 아님",              detail:"4px 또는 8px 그리드에 맞춰주세요", node:"card-layout", hl:[] },
 ];
 
-let demoRunning = false;
+let splitRunning = false;
 
-async function runDemo() {
-  if (demoRunning) return;
-  demoRunning = true;
-  const btn   = document.getElementById("demoRunBtn");
-  const icon  = document.getElementById("demoBtnIcon");
-  const label = document.getElementById("demoBtnLabel");
+/* 이슈 클릭 시 앱 화면의 해당 요소 하이라이트 */
+function focusIssue(issue) {
+  // 모든 하이라이트 끄기
+  document.querySelectorAll(".app-highlight").forEach(el => el.classList.remove("show"));
+  // 해당 이슈 하이라이트 켜기
+  if (issue.hl) issue.hl.forEach(id => {
+    const el = document.getElementById(id);
+    if (el) el.classList.add("show");
+  });
+}
+
+async function runSplitDemo() {
+  if (splitRunning) return;
+  splitRunning = true;
+
+  const btn   = document.getElementById("pluginRunBtn");
+  const icon  = document.getElementById("pRunIcon");
+  const label = document.getElementById("pRunLabel");
   btn.disabled = true;
-  icon.style.animation = "spin .6s linear infinite";
   icon.textContent = "◈";
+  icon.style.animation = "spin .6s linear infinite";
   label.textContent = "검사 중...";
 
-  document.getElementById("demoSummary").style.display = "none";
-  document.getElementById("demoBody").innerHTML = `<div class="demo-empty"><div style="font-size:24px;animation:spin 1s linear infinite;display:inline-block;opacity:.3">◈</div><div style="margin-top:8px">규칙 기반 검사 중...</div></div>`;
+  // 하이라이트 초기화
+  document.querySelectorAll(".app-highlight").forEach(el => el.classList.remove("show"));
+  document.getElementById("pluginSummary").style.display = "none";
+  document.getElementById("pluginBody").innerHTML = `<div class="plugin-empty"><div style="font-size:22px;animation:spin 1s linear infinite;display:inline-block;opacity:.3">◈</div><div style="margin-top:6px">규칙 기반 검사 중...</div></div>`;
 
-  const prog = document.getElementById("demoProgress");
+  const prog = document.getElementById("pluginProgress");
   prog.style.display = "block";
-  const pbar = document.getElementById("demoPbar");
+  const pbar = document.getElementById("pluginPbar");
 
-  const steps = [[1,"ds1",15,600],[1,"ds1",40,700],[2,"ds2",62,700],[3,"ds3",84,900],[4,"ds4",100,300]];
-  for (const [n,id,pct,ms] of steps) {
-    for (let i=1;i<=4;i++) document.getElementById("ds"+i).className="demo-step"+(i<n?" done":i===n?" active":"");
-    pbar.style.width = pct+"%";
+  // 단계별 진행
+  const steps = [
+    [1, 15, 600],
+    [1, 38, 500],
+    [2, 58, 700],
+    [3, 82, 900],
+    [4, 100, 300],
+  ];
+  for (const [step, pct, ms] of steps) {
+    for (let i = 1; i <= 4; i++) {
+      const el = document.getElementById("ps" + i);
+      el.className = "plugin-step" + (i < step ? " done" : i === step ? " active" : "");
+    }
+    pbar.style.width = pct + "%";
     await sleep(ms);
   }
 
-  const groups = {critical:[],warning:[],info:[]};
-  DEMO_ISSUES.forEach(i=>groups[i.sev].push(i));
-  const labels = {critical:"🔴 Critical",warning:"🟡 Warning",info:"🔵 Info"};
+  // 결과 렌더링
+  const groups = { critical: [], warning: [], info: [] };
+  DEMO_ISSUES.forEach(iss => groups[iss.sev].push(iss));
+  const labels = { critical: "🔴 Critical", warning: "🟡 Warning", info: "🔵 Info" };
   let html = "";
-  for (const [sev,items] of Object.entries(groups)) {
+  let issIdx = 0;
+  for (const [sev, items] of Object.entries(groups)) {
     if (!items.length) continue;
     html += `<div class="issue-group"><div class="grp-hd"><div class="sev-dot ${sev}"></div><div class="grp-label">${labels[sev]}</div><div class="grp-count">${items.length}건</div></div>`;
-    items.forEach((issue,idx)=>{
-      const fixHtml = issue.type==="contrast"
-        ? `<div class="color-fix"><span class="fix-label">추천 →</span><div class="cswatch" style="background:#3a3a8c"></div><div class="cswatch" style="background:#4a4aaa"></div><div class="cswatch" style="background:#2d2d7a"></div></div>` : "";
-      html += `<div class="issue-item" id="dii-${sev}-${idx}"><div class="issue-row"><div class="itype ${issue.type}">${issue.type}</div><div class="imsg">${esc(issue.msg)}</div></div><div class="idetail">${esc(issue.detail)}</div><div class="inode">${esc(issue.node)}</div>${fixHtml}</div>`;
+    items.forEach((issue, idx) => {
+      const fixHtml = issue.type === "contrast"
+        ? `<div class="color-fix"><span class="fix-label">추천 →</span><div class="cswatch" style="background:#3a3a8c" onclick="applyHighlightFix(this,'#3a3a8c','${issue.hl[0]||''}')"></div><div class="cswatch" style="background:#4a4aaa" onclick="applyHighlightFix(this,'#4a4aaa','${issue.hl[0]||''}')"></div><div class="cswatch" style="background:#2d2d7a" onclick="applyHighlightFix(this,'#2d2d7a','${issue.hl[0]||''}')"></div></div>` : "";
+      html += `<div class="issue-item" id="pii-${issIdx}" data-idx="${issIdx}" onclick="focusIssue(DEMO_ISSUES_FLAT[${issIdx}])"><div class="issue-row"><div class="itype ${issue.type}">${issue.type}</div><div class="imsg">${esc(issue.msg)}</div></div><div class="idetail">${esc(issue.detail)}</div><div class="inode">${esc(issue.node)}</div>${fixHtml}</div>`;
+      issIdx++;
     });
     html += "</div>";
   }
-  document.getElementById("demoBody").innerHTML = html;
-  document.getElementById("demoSummary").style.display = "flex";
+  document.getElementById("pluginBody").innerHTML = html;
+  document.getElementById("pluginSummary").style.display = "flex";
 
   let n = 0;
-  document.querySelectorAll(".issue-item").forEach(el=>{setTimeout(()=>el.classList.add("show"),n*55);n++;});
+  document.querySelectorAll("#pluginBody .issue-item").forEach(el => {
+    setTimeout(() => el.classList.add("show"), n * 60);
+    n++;
+  });
+
+  // 첫 번째 이슈 자동 하이라이트
+  await sleep(400);
+  focusIssue(DEMO_ISSUES[0]);
 
   icon.style.animation = "";
   icon.textContent = "✓";
   label.textContent = "다시 검사";
   btn.disabled = false;
-  demoRunning = false;
+  splitRunning = false;
 }
+
+// 색상 교체 시 앱 화면 실시간 반영
+function applyHighlightFix(swatchEl, hex, hlId) {
+  // 색상 교체: 앱 화면의 해당 텍스트 색상 변경
+  if (hlId === "hl-contrast1") {
+    const sub = document.querySelector(".app-hero-sub");
+    if (sub) sub.style.color = hex;
+    const hl = document.getElementById("hl-contrast1");
+    if (hl) hl.style.borderColor = "#22c55e";
+  } else if (hlId === "hl-contrast2") {
+    const links = document.querySelectorAll(".app-card-link");
+    links.forEach(el => el.style.color = hex);
+    const hl = document.getElementById("hl-contrast2");
+    if (hl) hl.style.borderColor = "#22c55e";
+  }
+}
+
+// DEMO_ISSUES 평탄화 (클릭 핸들러용)
+const DEMO_ISSUES_FLAT = DEMO_ISSUES;
 
 function sleep(ms){return new Promise(r=>setTimeout(r,ms));}
 function esc(s){return String(s||"").replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;");}
