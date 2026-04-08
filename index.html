@@ -41,16 +41,19 @@ body{font-family:"Pretendard",-apple-system,BlinkMacSystemFont,sans-serif;backgr
 .section-desc{font-size:16px;color:var(--text2);line-height:1.7;max-width:540px}
 
 /* ── 네비 ── */
-nav{position:fixed;top:0;left:0;right:0;z-index:100;border-bottom:1px solid var(--border2);background:rgba(245,245,247,.97);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);box-shadow:0 1px 0 rgba(0,0,0,.06)}
-.nav-inner{max-width:860px;margin:0 auto;padding:0 24px;height:52px;display:flex;align-items:center;justify-content:space-between}
-.nav-logo{display:flex;align-items:center;gap:8px;font-size:14px;font-weight:800;color:var(--text);text-decoration:none}
-.nav-logo-mark{width:26px;height:26px;border-radius:8px;background:var(--text);display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:800;color:#fff;letter-spacing:-.5px}
-.nav-links{display:flex;gap:28px}
-.nav-links a{font-size:13px;font-weight:500;color:var(--text2);text-decoration:none;transition:color .15s}
-.nav-links a:hover{color:var(--text)}
+nav{position:fixed;top:0;left:0;right:0;z-index:200;background:#fff;border-bottom:1px solid #ebebeb}
+.nav-inner{max-width:860px;margin:0 auto;padding:0 24px;height:60px;display:flex;align-items:center;justify-content:space-between}
+.nav-logo{display:flex;align-items:center;gap:9px;font-size:15px;font-weight:800;color:#111;text-decoration:none;letter-spacing:-.02em}
+.nav-logo-mark{width:28px;height:28px;border-radius:8px;background:#111;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:800;color:#fff;letter-spacing:-.5px;flex-shrink:0}
+.nav-right{display:flex;align-items:center;gap:8px}
+.nav-links{display:flex;gap:4px}
+.nav-links a{font-size:14px;font-weight:500;color:#555;text-decoration:none;padding:6px 12px;border-radius:8px;transition:all .15s}
+.nav-links a:hover{color:#111;background:#f5f5f5}
+.nav-cta{display:inline-flex;align-items:center;padding:7px 16px;border-radius:8px;background:#111;color:#fff;font-size:13px;font-weight:700;text-decoration:none;transition:background .15s;letter-spacing:-.01em;margin-left:8px}
+.nav-cta:hover{background:#333}
 
 /* ── 히어로 ── */
-.hero{padding:128px 0 72px;text-align:center}
+.hero{padding:136px 0 72px;text-align:center}
 .hero-badge{display:inline-flex;align-items:center;gap:6px;font-size:12px;font-weight:600;color:var(--text2);background:var(--bg2);border:1px solid var(--border);border-radius:20px;padding:5px 14px;margin-bottom:28px}
 .hero-badge .dot{width:6px;height:6px;border-radius:50%;background:#22c55e;animation:pulse 2s infinite;flex-shrink:0}
 @keyframes pulse{0%,100%{opacity:1}50%{opacity:.3}}
@@ -267,11 +270,14 @@ footer{border-top:1px solid var(--border);padding:40px 0;text-align:center;backg
       <div class="nav-logo-mark">QA</div>
       Auto QA
     </a>
-    <div class="nav-links">
-      <a href="#features">기능</a>
-      <a href="#demo">데모</a>
-      <a href="#standards">검사 기준</a>
-      <a href="#how">사용법</a>
+    <div class="nav-right">
+      <div class="nav-links">
+        <a href="#features">기능</a>
+        <a href="#demo">데모</a>
+        <a href="#standards">검사 기준</a>
+        <a href="#how">사용법</a>
+      </div>
+      <a class="nav-cta" href="https://www.figma.com/community">설치하기</a>
     </div>
   </div>
 </nav>
